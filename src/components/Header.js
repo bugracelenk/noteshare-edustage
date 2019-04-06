@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import classNames from "classnames";
-import { Transition } from "semantic-ui-react";
+import SearchBox from "./SearchBox";
+
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       headerClasses: {
         header_area: true,
-        navbar_fixed: false
+        navbar_fixed: false,
+        visible: false
       }
     };
     this.handleScroll = this.handleScroll.bind(this);
@@ -33,33 +35,11 @@ class Header extends Component {
   }
   render() {
     let headerClasses = classNames(this.state.headerClasses);
+    const { visible } = this.state;
     return (
       <header ref="Header" className={headerClasses}>
         <div className="main_menu">
-          <Transition visible={false} animation="slide up">
-            <div className="search_input" id="search_input_box">
-              <div className="container">
-                <form
-                  className="d-flex justify-content-between"
-                  method=""
-                  action=""
-                >
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="search_input"
-                    placeholder="Search Here"
-                  />
-                  <button type="submit" className="btn" />
-                  <span
-                    className="ti-close"
-                    id="close_search"
-                    title="Close Search"
-                  />
-                </form>
-              </div>
-            </div>
-          </Transition>
+          <SearchBox isVisible={visible} />
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container">
               <a className="navbar-brand logo_h" href="index.html">
@@ -152,8 +132,8 @@ class Header extends Component {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="#" className="nav-link search" id="search">
-                      <i className="ti-search" />
+                    <a onClick={() => this.setState({ visible: !this.state.visible})} className="nav-link search" id="search">
+                      <i className="fas fa-search" />
                     </a>
                   </li>
                 </ul>
