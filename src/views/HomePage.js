@@ -3,6 +3,9 @@ import Header from "../components/Header";
 import { Banner, EventCard } from "../components/HomePage";
 import { Title, Feature, Note, Card } from "../components/Utils";
 export default () => {
+
+  //TODO: get features and events from backend // https://noteshare-backend.herokuapp.com/api/home-page
+
   return (
     <div>
       <Header />
