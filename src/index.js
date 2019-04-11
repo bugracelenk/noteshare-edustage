@@ -2,10 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import HomePage from "./views/HomePage";
+import LoginPage from "views/LoginPage/LoginPage";
 import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
+import setAuthToken from "utils/setAuthToken";
+import { setCurrentUser } from "actions/authActions";
 import thunk from "redux-thunk";
 import reducers from "reducers";
 
@@ -22,10 +25,15 @@ const store = createStore(
   )
 );
 
+if (localStorage.jwtToken) {
+  setAuthToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(localStorage.jwtToken));
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <HomePage />
+      <LoginPage />
     </BrowserRouter>
   </Provider>,
   document.querySelector("#root")

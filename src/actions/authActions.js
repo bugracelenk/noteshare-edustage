@@ -1,0 +1,36 @@
+import axios from "axios";
+import setAuthToken from "utils/setAuthToken";
+import { SET_CURRENT_USER, LOGOUT_USER } from "actions/types";
+export function login(data) {
+  return dispatch => {
+    return axios
+      .post("https://noteshare-backend.herokuapp.com/api/users/login", data)
+      .then(res => {
+        const token = res.data.token;
+        localStorage.setItem("jwtToken", token);
+        setAuthToken(token);
+      })
+      .catch(err => console.log(err))
+  };
+}
+
+export function setCurrentUser(token) {
+  return {
+    type: SET_CURRENT_USER,
+    token
+  };
+}
+
+export function logout() {
+  return dispatch => {
+    localStorage.removeItem("jwtToken");
+    setAuthToken(false);
+    dispatch(logoutUser());
+  };
+}
+
+export function logoutUser() {
+  return {
+    type: LOGOUT_USER
+  };
+}
