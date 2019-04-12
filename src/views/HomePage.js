@@ -7,9 +7,6 @@ import PropTypes from "prop-types";
 import { getHomePageData } from "actions/homePageActions";
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentWillMount() {
     this.props.getHomePageData();
   }
@@ -158,7 +155,7 @@ class HomePage extends Component {
 
               <div class="col-lg-12">
                 <div class="text-center pt-lg-5 pt-3">
-                  <a href="#" class="event-link">
+                  <a href="http://localhost:300" class="event-link">
                     View All Event <img src="img/next.png" alt="" />
                   </a>
                 </div>

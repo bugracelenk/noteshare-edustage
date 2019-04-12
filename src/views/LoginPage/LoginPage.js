@@ -4,90 +4,76 @@ import { login } from "actions/authActions";
 
 import "./css/main.css";
 import "./css/util.css";
-import "./fonts/font-awesome-4.7.0/css/font-awesome.min.css";
-
 class LoginPage extends Component {
   state = {};
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
   render() {
     return (
-      <div className="limiter">
-        <div classNameName="container-login100">
-          <div classNameName="wrap-login100">
-            <div className="login100-more" />
+      <div class="limiter">
+        <div class="container-login100">
+          <div class="wrap-login100">
             <div class="login100-form validate-form">
-              <span className="login100-form-title p-b-43">
-                Login to continue
-              </span>
+              <span class="login100-form-title">Member Login</span>
 
-              <div className="wrap-input100 validate-input">
+              <div
+                class="wrap-input100 validate-input"
+                data-validate="Valid email is required: ex@abc.xyz"
+              >
                 <input
-                  className="input100"
+                  class="input100"
                   type="text"
                   name="email"
+                  placeholder="Email"
                   onChange={this.handleChange}
                 />
-                <span className="focus-input100" />
-                <span className="label-input100">Email</span>
+                <span class="focus-input100" />
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true" />
+                </span>
               </div>
 
-              <div className="wrap-input100 validate-input">
+              <div
+                class="wrap-input100 validate-input"
+                data-validate="Password is required"
+              >
                 <input
-                  className="input100"
+                  class="input100"
                   type="password"
                   name="password"
+                  placeholder="Password"
                   onChange={this.handleChange}
                 />
-                <span className="focus-input100" />
-                <span className="label-input100">Password</span>
+                <span class="focus-input100" />
+                <span class="symbol-input100">
+                  <i class="fa fa-lock" aria-hidden="true" />
+                </span>
               </div>
 
-              <div className="flex-sb-m w-full p-t-3 p-b-32">
-                <div className="contact100-form-checkbox">
-                  <input
-                    className="input-checkbox100"
-                    id="ckb1"
-                    type="checkbox"
-                    name="remember-me"
-                  />
-                  <label className="label-checkbox100" for="ckb1">
-                    Remember me
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <a href="#" className="txt1">
-                  Forgot Password?
-                </a>
-              </div>
-
-              <div className="container-login100-form-btn">
+              <div class="container-login100-form-btn">
                 <button
-                  className="login100-form-btn"
-                  onClick={() => this.props.login({ email: this.state.email, password: this.state.password})}
+                  class="login100-form-btn"
+                  onClick={() =>
+                    this.props.login({
+                      email: this.state.email,
+                      password: this.state.password
+                    })
+                  }
                 >
                   Login
                 </button>
               </div>
 
-              <div className="text-center p-t-46 p-b-20">
-                <span className="txt2">or sign up using</span>
+              <div class="text-center p-t-12">
+                <span class="txt1">Forgot</span>
+                <a class="txt2" href="#">
+                  Username / Password?
+                </a>
               </div>
 
-              <div className="login100-form-social flex-c-m">
-                <a
-                  href="#"
-                  className="login100-form-social-item flex-c-m bg1 m-r-5"
-                >
-                  <i className="fa fa-facebook-f" aria-hidden="true" />
-                </a>
-
-                <a
-                  href="#"
-                  className="login100-form-social-item flex-c-m bg2 m-r-5"
-                >
-                  <i className="fa fa-twitter" aria-hidden="true" />
+              <div class="text-center p-t-136">
+                <a class="txt2" href="#">
+                  Create your Account
+                  <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
                 </a>
               </div>
             </div>
