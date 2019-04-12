@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import HomePage from "./views/HomePage";
 import LoginPage from "views/LoginPage/LoginPage";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
@@ -33,7 +33,10 @@ if (localStorage.jwtToken) {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <LoginPage />
+      <Switch>
+        <Route exact path="/" component={HomePage}/>
+        <Route path="/login" component={LoginPage}/>
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.querySelector("#root")

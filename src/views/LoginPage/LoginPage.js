@@ -7,6 +7,11 @@ import "./css/util.css";
 class LoginPage extends Component {
   state = {};
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  componentDidUpdate() {
+    if(localStorage.jwtToken) {
+      this.props.history.push("/")
+    }
+  }
   render() {
     return (
       <div class="limiter">
