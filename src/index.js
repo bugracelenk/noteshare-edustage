@@ -13,6 +13,7 @@ import thunk from "redux-thunk";
 import reducers from "reducers";
 
 import { FlashMessages } from "components/Utils";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "bootstrap/dist/css/bootstrap.css";
 import "./scss/style.scss";
 import "./scss/flaticon.css";
@@ -35,10 +36,18 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <FlashMessages />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
-      </Switch>
+      <Route
+        render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition timeout={300} classNames="fade" key={location.key}>
+              <Switch location={location}>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/login" component={LoginPage} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
+      />
     </BrowserRouter>
   </Provider>,
   document.querySelector("#root")
