@@ -81,11 +81,6 @@ class Header extends Component {
             </Link>
           </li>
           <li className="nav-item active">
-            <button className="nav-link" onClick={() => addFlashMessage({ title: 'Success', text: 'First Message', messageTitle: "Successfully Logged In"})}>
-              Profile
-            </button>
-          </li>
-          <li className="nav-item active">
             <Link className="nav-link" to="/login">
               Log In
             </Link>
