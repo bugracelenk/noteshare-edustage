@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import SearchBox from "./SearchBox";
-
+import { connect } from "react-redux";
+import { logout } from "actions/authActions";
+import { withRouter, Link } from "react-router-dom";
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -33,9 +35,61 @@ class Header extends Component {
           headerClasses: { header_area: true, navbar_fixed: false }
         });
   }
+
   render() {
     let headerClasses = classNames(this.state.headerClasses);
     const { visible } = this.state;
+    const { isAuthenticated, history, logout } = this.props;
+
+    const userLinks = () => {
+      return (
+        <ul className="nav navbar-nav menu_nav ml-auto">
+          <li className="nav-item active">
+            <Link className="nav-link" href="index.html">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link className="nav-link" href="index.html">
+              Notes
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link className="nav-link" href="index.html">
+              Profile
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link className="nav-link" onClick={() => logout()}>
+              Log Out
+            </Link>
+          </li>
+        </ul>
+      );
+    };
+
+    const guestLinks = () => {
+      return (
+        <ul className="nav navbar-nav menu_nav ml-auto">
+          <li className="nav-item active">
+            <Link className="nav-link" href="index.html">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link className="nav-link" href="index.html">
+              About
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link className="nav-link" to="/login">
+              Log In
+            </Link>
+          </li>
+        </ul>
+      );
+    };
+
     return (
       <header ref="Header" className={headerClasses}>
         <div className="main_menu">
@@ -62,81 +116,7 @@ class Header extends Component {
                 className="collapse navbar-collapse offset"
                 id="navbarSupportedContent"
               >
-                <ul className="nav navbar-nav menu_nav ml-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="index.html">
-                      Home
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="about-us.html">
-                      About
-                    </a>
-                  </li>
-                  <li className="nav-item submenu dropdown">
-                    <a
-                      href="#"
-                      className="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Pages
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <a className="nav-link" href="courses.html">
-                          Courses
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="course-details.html">
-                          Course Details
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="elements.html">
-                          Elements
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item submenu dropdown">
-                    <a
-                      href="#"
-                      className="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Blog
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <a className="nav-link" href="blog.html">
-                          Blog
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="single-blog.html">
-                          Blog Details
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="contact.html">
-                      Contact
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a onClick={() => this.setState({ visible: !this.state.visible})} className="nav-link search" id="search">
-                      <i className="fas fa-search" />
-                    </a>
-                  </li>
-                </ul>
+                {isAuthenticated ? userLinks() : guestLinks()}
               </div>
             </div>
           </nav>
@@ -146,4 +126,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToFunction(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+}
+
+export default connect(mapStateToFunction, { logout })(withRouter(Header));
