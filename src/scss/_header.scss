@@ -13,10 +13,12 @@
       .nav-item {
         margin-right: 45px;
         .nav-link {
-          font: 500 14px/80px $title-font;
+          font-family: $title-font;
+          font-size: 15px;
           text-transform: capitalize;
           color: $title-color;
-          padding: 0px;
+          padding: 6px;
+          margin-top: 15px;
           display: inline-block;
           cursor: pointer;
           @media (max-width: 991px) {
@@ -25,10 +27,7 @@
           &:after {
             display: none;
           }
-        }
-        &:hover,
-        &.active {
-          .nav-link {
+          &:hover {
             color: $primary-color;
           }
         }

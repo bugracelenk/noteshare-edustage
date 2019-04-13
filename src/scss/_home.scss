@@ -542,7 +542,11 @@
       margin-left: 5px;
       display: inline-block;
     }
+    &:hover {
+      color: #fff;
+    }
   }
+  
 }
 
 .single_event {
@@ -577,6 +581,7 @@
     .time-location {
       padding-left: 15px;
       font-size: 14px;
+      color: $offwhite;
       p {
         margin-bottom: 0px;
         span {

@@ -18,6 +18,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    //gets current offsets and sets to the state
     const el = document.querySelector("header");
     this.setState({ top: el.offsetTop, height: el.offsetHeight });
     window.addEventListener("scroll", this.handleScroll);
@@ -26,6 +27,7 @@ class Header extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
   handleScroll() {
+    //checks it should make navbar fixed or not
     this.setState({ scroll: window.scrollY });
     this.state.scroll > this.state.top
       ? this.setState({
@@ -39,7 +41,7 @@ class Header extends Component {
   render() {
     let headerClasses = classNames(this.state.headerClasses);
     const { visible } = this.state;
-    const { isAuthenticated, history, logout } = this.props;
+    const { isAuthenticated, logout } = this.props;
 
     const userLinks = () => {
       return (
