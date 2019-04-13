@@ -12,6 +12,7 @@ import { setCurrentUser } from "actions/authActions";
 import thunk from "redux-thunk";
 import reducers from "reducers";
 
+import { FlashMessages } from "components/Utils";
 import "bootstrap/dist/css/bootstrap.css";
 import "./scss/style.scss";
 import "./scss/flaticon.css";
@@ -33,9 +34,10 @@ if (localStorage.jwtToken) {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <FlashMessages />
       <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route path="/login" component={LoginPage}/>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/login" component={LoginPage} />
       </Switch>
     </BrowserRouter>
   </Provider>,

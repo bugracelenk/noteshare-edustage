@@ -3,6 +3,7 @@ import classNames from "classnames";
 import SearchBox from "./SearchBox";
 import { connect } from "react-redux";
 import { logout } from "actions/authActions";
+import { addFlashMessage } from "actions/flashMessageActions";
 import { withRouter, Link } from "react-router-dom";
 class Header extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class Header extends Component {
   render() {
     let headerClasses = classNames(this.state.headerClasses);
     const { visible } = this.state;
-    const { isAuthenticated, logout } = this.props;
+    const { isAuthenticated, logout, addFlashMessage } = this.props;
 
     const userLinks = () => {
       return (
@@ -56,11 +57,7 @@ class Header extends Component {
               Notes
             </Link>
           </li>
-          <li className="nav-item active">
-            <Link className="nav-link" href="index.html">
-              Profile
-            </Link>
-          </li>
+          
           <li className="nav-item active">
             <Link className="nav-link" onClick={() => logout()}>
               Log Out
@@ -82,6 +79,11 @@ class Header extends Component {
             <Link className="nav-link" href="index.html">
               About
             </Link>
+          </li>
+          <li className="nav-item active">
+            <button className="nav-link" onClick={() => addFlashMessage({ title: 'Success', text: 'First Message', messageTitle: "Successfully Logged In"})}>
+              Profile
+            </button>
           </li>
           <li className="nav-item active">
             <Link className="nav-link" to="/login">
@@ -134,4 +136,7 @@ function mapStateToFunction(state) {
   };
 }
 
-export default connect(mapStateToFunction, { logout })(withRouter(Header));
+export default connect(
+  mapStateToFunction,
+  { logout, addFlashMessage }
+)(withRouter(Header));
